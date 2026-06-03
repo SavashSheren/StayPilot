@@ -11,13 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StayPilot.Application\StayPilot.Application.csproj" />
-    <ProjectReference Include="..\StayPilot.Infrastructure\StayPilot.Infrastructure.csproj" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Middlewares\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Middlewares\" />
+    <ProjectReference Include="..\StayPilot.Application\StayPilot.Application.csproj" />
+    <ProjectReference Include="..\StayPilot.Infrastructure\StayPilot.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
