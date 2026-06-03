@@ -524,3 +524,54 @@ a {
         flex-direction: column;
     }
 }
+.sp-contact-points {
+    display: grid;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+    .sp-contact-points div {
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(255,255,255,.74);
+        border: 1px solid var(--sp-border);
+    }
+
+    .sp-contact-points strong {
+        display: block;
+        font-size: 15px;
+        margin-bottom: 6px;
+        color: var(--sp-text);
+    }
+
+    .sp-contact-points span {
+        color: var(--sp-muted);
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+.sp-alert {
+    padding: 14px 16px;
+    border-radius: 16px;
+    font-weight: 800;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.sp-alert-success {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid rgba(16, 185, 129, .25);
+}
+
+.sp-alert-error {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid rgba(239, 68, 68, .25);
+}
+
+.sp-contact-form input:focus,
+.sp-contact-form textarea:focus {
+    border-color: rgba(37, 99, 235, .55);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .08);
+}

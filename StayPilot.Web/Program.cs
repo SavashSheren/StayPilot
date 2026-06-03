@@ -17,6 +17,7 @@ builder.Services.AddHttpClient("StayPilotApi", client =>
 });
 
 builder.Services.AddScoped<IHomeContentApiService, HomeContentApiService>();
+builder.Services.AddScoped<IContactMessageApiService, ContactMessageApiService>();
 
 var app = builder.Build();
 
