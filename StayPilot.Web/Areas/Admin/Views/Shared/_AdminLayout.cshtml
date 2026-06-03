@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - StayPilot Admin</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/staypilot-admin.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="admin-shell">
+        <aside class="admin-sidebar">
+            <a class="admin-brand" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                <span class="admin-brand-icon">S</span>
+                <span>
+                    StayPilot
+                    <small>Admin Console</small>
+                </span>
+            </a>
+
+            <nav class="admin-menu">
+                <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="active">
+                    <span>⌁</span> Dashboard
+                </a>
+
+                <a href="#">
+                    <span>✦</span> Hero Sections
+                </a>
+
+                <a href="#">
+                    <span>◈</span> Destinations
+                </a>
+
+                <a href="#">
+                    <span>✎</span> Blog Posts
+                </a>
+
+                <a href="#">
+                    <span>✉</span> Messages
+                </a>
+
+                <a href="#">
+                    <span>◎</span> API Health
+                </a>
+            </nav>
+
+            <div class="admin-sidebar-card">
+                <strong>API Platform</strong>
+                <p>StayPilot Admin consumes the WebAPI layer, not the database directly.</p>
+            </div>
+        </aside>
+
+        <section class="admin-main">
+            <header class="admin-topbar">
+                <div>
+                    <h1>@ViewData["Title"]</h1>
+                    <p>AI powered hotel discovery and travel intelligence management.</p>
+                </div>
+
+                <div class="admin-top-actions">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">View Website</a>
+                    <span>Admin</span>
+                </div>
+            </header>
+
+            <main class="admin-content">
+                @RenderBody()
+            </main>
+        </section>
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

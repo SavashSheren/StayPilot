@@ -1,0 +1,119 @@
+﻿@model StayPilot.Application.DTOs.AdminDtos.ResultAdminDashboardDto
+@using StayPilot.Domain.Enums
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<section class="admin-stat-grid">
+    <article class="admin-stat-card">
+        <span>Destinations</span>
+        <strong>@Model.TotalDestinations</strong>
+        <p>@Model.FeaturedDestinations featured destinations are visible on the landing page.</p>
+    </article>
+
+    <article class="admin-stat-card">
+        <span>Blog Posts</span>
+        <strong>@Model.TotalBlogPosts</strong>
+        <p>@Model.FeaturedBlogPosts featured posts support travel intelligence content.</p>
+    </article>
+
+    <article class="admin-stat-card">
+        <span>Messages</span>
+        <strong>@Model.TotalContactMessages</strong>
+        <p>@Model.UnreadContactMessages unread messages require admin attention.</p>
+    </article>
+
+    <article class="admin-stat-card">
+        <span>Hero Sections</span>
+        <strong>@Model.TotalHeroSections</strong>
+        <p>@Model.ActiveHeroSections active hero section records are available.</p>
+    </article>
+</section>
+
+<section class="admin-dashboard-grid">
+    <div class="admin-panel">
+        <div class="admin-panel-header">
+            <div>
+                <h2>Recent Contact Messages</h2>
+                <p>Latest messages sent from the public website contact form.</p>
+            </div>
+        </div>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Sender</th>
+                    <th>Subject</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.RecentContactMessages.Any())
+                {
+                    foreach (var message in Model.RecentContactMessages)
+                    {
+                        <tr>
+                            <td>
+                                @message.FullName
+                                <small>@message.Email</small>
+                            </td>
+                            <td>
+                                @message.Subject
+                                <small>@message.Message</small>
+                            </td>
+                            <td>
+                                @if (message.Status == ContactMessageStatus.Unread)
+                                {
+                                    <span class="admin-badge admin-badge-warning">Unread</span>
+                                }
+                                else
+                                {
+                                    <span class="admin-badge admin-badge-success">@message.Status</span>
+                                }
+                            </td>
+                            <td>
+                                @message.CreatedDate.ToLocalTime().ToString("dd MMM yyyy")
+                                <small>@message.CreatedDate.ToLocalTime().ToString("HH:mm")</small>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4">No contact messages yet.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <aside class="admin-panel">
+        <div class="admin-panel-header">
+            <div>
+                <h2>System Overview</h2>
+                <p>Current platform readiness snapshot.</p>
+            </div>
+        </div>
+
+        <div class="admin-system-list">
+            <div class="admin-system-item">
+                <strong>API Connected Architecture</strong>
+                <span>Admin panel consumes StayPilot.API through HttpClient, keeping Web isolated from Infrastructure.</span>
+            </div>
+
+            <div class="admin-system-item">
+                <strong>Content Ready</strong>
+                <span>Hero sections, destinations, blog posts and contact messages are backed by SQL Server.</span>
+            </div>
+
+            <div class="admin-system-item">
+                <strong>Generated At</strong>
+                <span>@Model.GeneratedAt.ToLocalTime().ToString("dd MMM yyyy HH:mm")</span>
+            </div>
+        </div>
+    </aside>
+</section>
