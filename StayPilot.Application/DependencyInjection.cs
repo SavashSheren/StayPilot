@@ -12,6 +12,9 @@ namespace StayPilot.Application
             services.AddAutoMapper(cfg => { }, typeof(GeneralMapping));
 
             services.AddScoped<IHeroSectionService, HeroSectionService>();
+            services.AddScoped<IDestinationService, DestinationService>();
+            services.AddScoped<IBlogPostService, BlogPostService>();
+            services.AddScoped<IContactMessageService, ContactMessageService>();
 
             return services;
         }
