@@ -1,32 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
-using StayPilot.Web.Models;
-using System.Diagnostics;
+using StayPilot.Web.Services;
 
 namespace StayPilot.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IHomeContentApiService _homeContentApiService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IHomeContentApiService homeContentApiService)
         {
-            _logger = logger;
+            _homeContentApiService = homeContentApiService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
+            var model = await _homeContentApiService.GetLandingContentAsync();
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(model);
         }
     }
 }

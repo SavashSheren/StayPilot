@@ -1,8 +1,189 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model StayPilot.Application.DTOs.HomeDtos.ResultHomeContentDto
+
+@{
+    ViewData["Title"] = "AI Powered Hotel Discovery";
+    var hero = Model.HeroSection;
+    var heroImage = string.IsNullOrWhiteSpace(hero?.BackgroundImageUrl)
+        ? "https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
+        : hero.BackgroundImageUrl;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="sp-hero">
+    <div class="sp-hero-bg" style="background-image: url('@heroImage');"></div>
+
+    <div class="sp-container sp-hero-content">
+        <div>
+            <div class="sp-eyebrow">AI Powered Travel Intelligence</div>
+
+            <h1>@(hero?.Title ?? "Find Your Perfect Stay with AI")</h1>
+
+            <p>
+                @(hero?.Description ?? "StayPilot helps travelers discover hotels, compare destinations and plan smarter trips with AI-powered travel intelligence.")
+            </p>
+
+            <div class="sp-actions">
+                <a class="sp-btn-primary" href="@(hero?.PrimaryButtonUrl ?? "#search")">
+                    @(hero?.PrimaryButtonText ?? "Search Hotels")
+                </a>
+
+                <a class="sp-btn-secondary" href="@(hero?.SecondaryButtonUrl ?? "#ai")">
+                    @(hero?.SecondaryButtonText ?? "Ask AI Assistant")
+                </a>
+            </div>
+        </div>
+
+        <div id="search" class="sp-search-card">
+            <h2>Plan smarter trips</h2>
+            <p>Search hotels, compare destinations and use AI-powered insights before booking.</p>
+
+            <form class="sp-search-grid">
+                <div class="sp-field">
+                    <label>Destination</label>
+                    <input type="text" placeholder="Istanbul, Paris, Dubai..." />
+                </div>
+
+                <div class="sp-field">
+                    <label>Check-in</label>
+                    <input type="date" />
+                </div>
+
+                <div class="sp-field">
+                    <label>Check-out</label>
+                    <input type="date" />
+                </div>
+
+                <div class="sp-field">
+                    <label>Guests</label>
+                    <select>
+                        <option>2 adults · 1 room</option>
+                        <option>1 adult · 1 room</option>
+                        <option>3 adults · 2 rooms</option>
+                        <option>Family trip</option>
+                    </select>
+                </div>
+
+                <button type="button" class="sp-search-button">Search with StayPilot</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section id="destinations" class="sp-section">
+    <div class="sp-container">
+        <div class="sp-section-head">
+            <div>
+                <div class="sp-section-kicker">Featured Destinations</div>
+                <h2 class="sp-section-title">Where travelers go next</h2>
+            </div>
+
+            <p class="sp-section-desc">
+                Explore high-demand destinations with average hotel price intelligence and smart travel positioning.
+            </p>
+        </div>
+
+        <div class="sp-destination-grid">
+            @foreach (var destination in Model.FeaturedDestinations.Take(6))
+            {
+                <article class="sp-destination-card">
+                    <div class="sp-card-image" style="background-image: url('@destination.ImageUrl');"></div>
+
+                    <div class="sp-card-body">
+                        <div class="sp-card-meta">@destination.HighlightText</div>
+
+                        <h3>@destination.CityName, @destination.CountryName</h3>
+
+                        <p>@destination.Description</p>
+
+                        <div class="sp-price-row">
+                            <span>Avg. hotel price</span>
+                            <strong>$@destination.AverageHotelPrice</strong>
+                        </div>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section id="ai" class="sp-section sp-ai-section">
+    <div class="sp-container sp-ai-grid">
+        <div>
+            <div class="sp-section-kicker">AI Travel Assistant</div>
+            <h2 class="sp-section-title">Travel decisions need intelligence, not noise.</h2>
+            <p class="sp-section-desc">
+                StayPilot is designed to combine hotel discovery, destination insights, weather, currency and AI recommendations in one premium travel platform.
+            </p>
+
+            <div class="sp-actions">
+                <a class="sp-btn-primary" href="#">Ask AI Assistant</a>
+                <a class="sp-btn-secondary" href="#insights">Read insights</a>
+            </div>
+        </div>
+
+        <div class="sp-ai-panel">
+            <div class="sp-ai-line">
+                <strong>User:</strong> I want a 4-day trip to Istanbul. Where should I stay?
+            </div>
+
+            <div class="sp-ai-line">
+                <strong>StayPilot AI:</strong> For culture and airport access, compare Sultanahmet, Karaköy and Kadıköy. If your priority is Sabiha Gökçen access, consider Pendik or Kurtköy.
+            </div>
+
+            <div class="sp-ai-line">
+                <strong>System:</strong> Weather, hotel price and destination context can be combined before final booking.
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="insights" class="sp-section">
+    <div class="sp-container">
+        <div class="sp-section-head">
+            <div>
+                <div class="sp-section-kicker">Travel Insights</div>
+                <h2 class="sp-section-title">Built for smarter planning</h2>
+            </div>
+
+            <p class="sp-section-desc">
+                Editorial content that explains how modern travel platforms, AI and destination intelligence improve booking decisions.
+            </p>
+        </div>
+
+        <div class="sp-blog-grid">
+            @foreach (var blog in Model.FeaturedBlogPosts.Take(3))
+            {
+                <article class="sp-blog-card">
+                    <div class="sp-blog-image" style="background-image: url('@blog.CoverImageUrl');"></div>
+
+                    <div class="sp-blog-content">
+                        <div class="sp-card-meta">@blog.ReadingTimeMinute min read</div>
+                        <h3>@blog.Title</h3>
+                        <p>@blog.Summary</p>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="sp-section sp-contact">
+    <div class="sp-container">
+        <div class="sp-contact-box">
+            <div>
+                <div class="sp-section-kicker">Contact</div>
+                <h2 class="sp-section-title">Build your next trip with confidence.</h2>
+                <p class="sp-section-desc">
+                    This contact block will be connected to the public Contact API in the next UI stage.
+                </p>
+            </div>
+
+            <form class="sp-contact-form">
+                <input type="text" placeholder="Full name" />
+                <input type="email" placeholder="Email address" />
+                <input type="text" placeholder="Subject" />
+                <textarea placeholder="Your message"></textarea>
+                <button type="button">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
