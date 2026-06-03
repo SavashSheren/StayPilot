@@ -15,7 +15,6 @@
     <Folder Include="ApiClients\" />
     <Folder Include="Configurations\" />
     <Folder Include="ExternalServices\" />
-    <Folder Include="SeedData\" />
   </ItemGroup>
 
   <ItemGroup>
