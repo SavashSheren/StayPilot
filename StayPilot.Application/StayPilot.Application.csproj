@@ -12,14 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Constants\" />
-    <Folder Include="DTOs\AiDtos\" />
-    <Folder Include="DTOs\ContactDtos\" />
-    <Folder Include="DTOs\BlogDtos\" />
-    <Folder Include="DTOs\DestinationDtos\" />
-    <Folder Include="DTOs\HeroDtos\" />
-    <Folder Include="DTOs\HotelDtos\" />
-    <Folder Include="DTOs\CurrencyDtos\" />
-    <Folder Include="DTOs\WeatherDtos\" />
     <Folder Include="Mappings\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Validators\" />
