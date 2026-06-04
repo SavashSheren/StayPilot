@@ -129,8 +129,7 @@ StayPilot
 │   ├── ViewModels
 │   ├── Views
 │   └── wwwroot
-│
-└── Screenshots
+│       └── Screenshots
 ```
 
 ---
@@ -141,7 +140,7 @@ StayPilot
 
 The public website starts with a modern hero section, navigation links, and a hotel search form. Users can search hotels by destination, check-in date, check-out date, adult count, and room count.
 
-![Home Hero Search](Screenshots/home-hero-search.png)
+![Home Hero Search](StayPilot.Web/wwwroot/Screenshots/home-hero-search.png)
 
 ---
 
@@ -149,7 +148,7 @@ The public website starts with a modern hero section, navigation links, and a ho
 
 Featured destinations are dynamically displayed on the public landing page. Each destination includes city, country, image, highlight text, average hotel price, and description.
 
-![Featured Destinations](Screenshots/home-featured-destinations.png)
+![Featured Destinations](StayPilot.Web/wwwroot/Screenshots/home-featured-destinations.png)
 
 ---
 
@@ -157,7 +156,7 @@ Featured destinations are dynamically displayed on the public landing page. Each
 
 Admin users can create, update, activate, deactivate, feature, and delete destination cards. These records are managed through the admin panel and rendered on the public website.
 
-![Admin Destination Management](Screenshots/admin-destination-management.png)
+![Admin Destination Management](StayPilot.Web/wwwroot/Screenshots/admin-destination-management.png)
 
 ---
 
@@ -165,7 +164,7 @@ Admin users can create, update, activate, deactivate, feature, and delete destin
 
 The landing page includes an AI assistant preview section that explains how StayPilot helps users make smarter travel decisions.
 
-![AI Assistant Preview](Screenshots/home-ai-preview.png)
+![AI Assistant Preview](StayPilot.Web/wwwroot/Screenshots/home-ai-preview.png)
 
 ---
 
@@ -173,7 +172,7 @@ The landing page includes an AI assistant preview section that explains how Stay
 
 Users can search for hotels through the public website. The search result page displays hotel cards with image, hotel name, location, rating, price, and action buttons.
 
-![Hotel Search Results](Screenshots/hotel-search-results.png)
+![Hotel Search Results](StayPilot.Web/wwwroot/Screenshots/hotel-search-results.png)
 
 ---
 
@@ -181,7 +180,7 @@ Users can search for hotels through the public website. The search result page d
 
 Each hotel has a detail page with hero image, gallery, facilities, rating information, location intelligence, and booking action panel.
 
-![Hotel Detail Page](Screenshots/hotel-detail-page.png)
+![Hotel Detail Page](StayPilot.Web/wwwroot/Screenshots/hotel-detail-page.png)
 
 ---
 
@@ -189,7 +188,7 @@ Each hotel has a detail page with hero image, gallery, facilities, rating inform
 
 Users can ask travel-related questions such as where to stay, what to consider before booking, and how to plan a trip. The current version uses a mock AI provider and is ready for real AI provider integration.
 
-![AI Travel Assistant](Screenshots/ai-travel-assistant-form.png)
+![AI Travel Assistant](StayPilot.Web/wwwroot/Screenshots/ai-travel-assistant-form.png)
 
 ---
 
@@ -197,7 +196,7 @@ Users can ask travel-related questions such as where to stay, what to consider b
 
 AI assistant conversations are stored and can be reviewed from the admin panel. This provides an audit and monitoring layer for AI interactions.
 
-![Admin AI Conversation Logs](Screenshots/admin-ai-conversation-logs.png)
+![Admin AI Conversation Logs](StayPilot.Web/wwwroot/Screenshots/admin-ai-conversation-logs.png)
 
 ---
 
@@ -205,7 +204,7 @@ AI assistant conversations are stored and can be reviewed from the admin panel. 
 
 StayPilot includes travel insight content that can be managed as blog posts. These insights are displayed on the public website to support travel planning and content marketing.
 
-![Travel Insights](Screenshots/home-travel-insights.png)
+![Travel Insights](StayPilot.Web/wwwroot/Screenshots/home-travel-insights.png)
 
 ---
 
@@ -213,7 +212,7 @@ StayPilot includes travel insight content that can be managed as blog posts. The
 
 The public contact form sends messages through the Web layer to the API. Messages are stored in SQL Server and can be managed from the admin panel.
 
-![Contact Form](Screenshots/home-contact-form.png)
+![Contact Form](StayPilot.Web/wwwroot/Screenshots/home-contact-form.png)
 
 ---
 
@@ -221,7 +220,7 @@ The public contact form sends messages through the Web layer to the API. Message
 
 The admin panel is protected with cookie-based authentication and role-based authorization. Public users cannot access admin routes without signing in.
 
-![Admin Login](Screenshots/admin-login.png)
+![Admin Login](StayPilot.Web/wwwroot/Screenshots/admin-login.png)
 
 ---
 
@@ -229,7 +228,7 @@ The admin panel is protected with cookie-based authentication and role-based aut
 
 The dashboard provides a high-level overview of the platform, including content statistics, recent messages, and system information.
 
-![Admin Dashboard](Screenshots/admin-dashboard.png)
+![Admin Dashboard](StayPilot.Web/wwwroot/Screenshots/admin-dashboard.png)
 
 ---
 
@@ -237,7 +236,7 @@ The dashboard provides a high-level overview of the platform, including content 
 
 Hero sections can be managed from the admin panel. Admin users can create, update, activate, deactivate, and delete hero records.
 
-![Admin Hero Management](Screenshots/admin-hero-management.png)
+![Admin Hero Management](StayPilot.Web/wwwroot/Screenshots/admin-hero-management.png)
 
 ---
 
@@ -245,7 +244,7 @@ Hero sections can be managed from the admin panel. Admin users can create, updat
 
 The admin panel includes a system health page that checks API status and database connection status.
 
-![Admin API Health](Screenshots/admin-api-health.png)
+![Admin API Health](StayPilot.Web/wwwroot/Screenshots/admin-api-health.png)
 
 ---
 
@@ -253,7 +252,7 @@ The admin panel includes a system health page that checks API status and databas
 
 StayPilot exposes API endpoints through Swagger / OpenAPI. This makes the API layer easy to test and demonstrate.
 
-![Swagger API Overview](Screenshots/swagger-api-overview.png)
+![Swagger API Overview](StayPilot.Web/wwwroot/Screenshots/swagger-api-overview.png)
 
 ---
 
