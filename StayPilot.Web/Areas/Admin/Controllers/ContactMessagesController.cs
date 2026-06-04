@@ -2,10 +2,12 @@
 using StayPilot.Application.DTOs.ContactDtos;
 using StayPilot.Domain.Enums;
 using StayPilot.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StayPilot.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ContactMessagesController : Controller
     {
         private readonly IAdminContactMessageApiService _adminContactMessageApiService;

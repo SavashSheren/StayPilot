@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StayPilot.Application.DTOs.HeroDtos;
 using StayPilot.Web.Services;
-
+using Microsoft.AspNetCore.Authorization;
 namespace StayPilot.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class HeroSectionsController : Controller
     {
         private readonly IAdminHeroSectionApiService _adminHeroSectionApiService;

@@ -83,7 +83,17 @@
 
                 <div class="admin-top-actions">
                     <a asp-area="" asp-controller="Home" asp-action="Index">View Website</a>
-                    <span>Admin</span>
+
+                    <form asp-area="Admin"
+                          asp-controller="Auth"
+                          asp-action="Logout"
+                          method="post"
+                          class="admin-logout-form">
+                        @Html.AntiForgeryToken()
+                        <button type="submit">Logout</button>
+                    </form>
+
+                    <span>@User.Identity?.Name</span>
                 </div>
             </header>
 

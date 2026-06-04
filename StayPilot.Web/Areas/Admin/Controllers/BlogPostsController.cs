@@ -2,10 +2,12 @@
 using StayPilot.Application.DTOs.BlogDtos;
 using StayPilot.Web.Services;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StayPilot.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class BlogPostsController : Controller
     {
         private readonly IAdminBlogPostApiService _adminBlogPostApiService;

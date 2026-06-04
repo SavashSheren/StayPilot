@@ -1,0 +1,83 @@
+﻿@model StayPilot.Web.Areas.Admin.ViewModels.AdminLoginViewModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Admin Login";
+    var returnUrl = ViewBag.ReturnUrl as string;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Admin Login - StayPilot</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/staypilot-admin.css" asp-append-version="true" />
+</head>
+<body class="admin-auth-body">
+    <main class="admin-auth-shell">
+        <section class="admin-auth-card">
+            <div class="admin-auth-brand">
+                <span>S</span>
+                <div>
+                    <strong>StayPilot</strong>
+                    <small>Admin Console</small>
+                </div>
+            </div>
+
+            <h1>Welcome back</h1>
+            <p>Sign in to manage StayPilot content, messages and system status.</p>
+
+            @if (TempData["AuthError"] is not null)
+            {
+                <div class="admin-alert admin-alert-error">@TempData["AuthError"]</div>
+            }
+
+            <form asp-area="Admin"
+                  asp-controller="Auth"
+                  asp-action="Login"
+                  asp-route-returnUrl="@returnUrl"
+                  method="post"
+                  class="admin-auth-form">
+                @Html.AntiForgeryToken()
+
+                <div class="admin-form-group">
+                    <label>Email</label>
+                    <input asp-for="Email" type="email" placeholder="admin@staypilot.com" required />
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Password</label>
+                    <input asp-for="Password" type="password" placeholder="••••••••" required />
+                </div>
+
+                <label class="admin-auth-check">
+                    <input asp-for="RememberMe" />
+                    <span>Remember me for 7 days</span>
+                </label>
+
+                <button type="submit">Sign In</button>
+            </form>
+
+            <div class="admin-auth-demo">
+                <strong>Demo Credentials</strong>
+                <span>Email: admin@staypilot.com</span>
+                <span>Password: DemoAdmin123!</span>
+            </div>
+        </section>
+
+        <aside class="admin-auth-side">
+            <div>
+                <span class="admin-auth-kicker">Secure Admin Area</span>
+                <h2>Content management, API monitoring and platform control in one place.</h2>
+                <p>
+                    StayPilot keeps the Web layer isolated from Infrastructure and uses the API as the central application gateway.
+                </p>
+            </div>
+        </aside>
+    </main>
+</body>
+</html>

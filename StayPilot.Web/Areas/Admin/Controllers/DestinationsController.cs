@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StayPilot.Application.DTOs.DestinationDtos;
 using StayPilot.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StayPilot.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class DestinationsController : Controller
     {
         private readonly IAdminDestinationApiService _adminDestinationApiService;

@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Access Denied";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Access Denied - StayPilot</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/staypilot-admin.css" asp-append-version="true" />
+</head>
+<body class="admin-auth-body">
+    <main class="admin-auth-shell">
+        <section class="admin-auth-card">
+            <div class="admin-auth-brand">
+                <span>S</span>
+                <div>
+                    <strong>StayPilot</strong>
+                    <small>Admin Console</small>
+                </div>
+            </div>
+
+            <h1>Access denied</h1>
+            <p>You do not have permission to access this admin resource.</p>
+
+            <a class="admin-auth-link" asp-area="Admin" asp-controller="Auth" asp-action="Login">
+                Back to Login
+            </a>
+        </section>
+    </main>
+</body>
+</html>
