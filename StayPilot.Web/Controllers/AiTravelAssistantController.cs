@@ -49,15 +49,22 @@ namespace StayPilot.Web.Controllers
 
             var answer = await _aiTravelAssistantApiService.AskAsync(questionForm);
 
-            if (answer is null || !answer.IsSuccessful)
+            if (answer is null)
             {
-                model.ErrorMessage = answer?.ErrorMessage ?? "AI assistant could not generate an answer.";
+                model.ErrorMessage = "AI assistant returned an empty response.";
+
+                return View("Index", model);
+            }
+
+            if (!answer.IsSuccessful)
+            {
+                model.ErrorMessage = answer.ErrorMessage ?? "AI assistant could not generate an answer.";
 
                 return View("Index", model);
             }
 
             model.Answer = answer;
-            model.HasAnswer = true;
+            model.HasAnswer = !string.IsNullOrWhiteSpace(answer.Answer);
 
             return View("Index", model);
         }

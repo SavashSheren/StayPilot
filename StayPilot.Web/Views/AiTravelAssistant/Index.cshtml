@@ -8,7 +8,9 @@
     <div class="sp-container ai-page-grid">
         <div>
             <span class="hotel-kicker">AI Travel Assistant</span>
+
             <h1>Plan smarter trips with StayPilot AI.</h1>
+
             <p>
                 Ask destination, hotel, budget or trip planning questions. This version uses a mock AI provider and logs conversations into SQL Server.
             </p>
@@ -26,7 +28,7 @@
 
                 <div>
                     <strong>Provider Ready</strong>
-                    <span>Mock provider can be replaced with real AI provider later</span>
+                    <span>Mock provider can be replaced with a real AI provider later</span>
                 </div>
             </div>
         </div>
@@ -42,27 +44,39 @@
 
             @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
             {
-                <div class="sp-alert sp-alert-error">@Model.ErrorMessage</div>
+                <div class="sp-alert sp-alert-error">
+                    @Model.ErrorMessage
+                </div>
             }
 
             <div class="sp-field light">
                 <label>Destination</label>
-                <input asp-for="QuestionForm.Destination" placeholder="Istanbul, Paris, Dubai..." />
+                <input type="text"
+                       name="Destination"
+                       value="@Model.QuestionForm.Destination"
+                       placeholder="Istanbul, Paris, Dubai..." />
             </div>
 
             <div class="sp-field light">
                 <label>Travel Date</label>
-                <input asp-for="QuestionForm.TravelDate" placeholder="2026-07-01" />
+                <input type="text"
+                       name="TravelDate"
+                       value="@Model.QuestionForm.TravelDate"
+                       placeholder="2026-07-01" />
             </div>
 
             <div class="sp-field light">
                 <label>Travel Style</label>
-                <input asp-for="QuestionForm.TravelStyle" placeholder="Luxury, budget, culture, business..." />
+                <input type="text"
+                       name="TravelStyle"
+                       value="@Model.QuestionForm.TravelStyle"
+                       placeholder="Luxury, budget, culture, business..." />
             </div>
 
             <div class="sp-field light">
                 <label>Your Question</label>
-                <textarea asp-for="QuestionForm.Question" placeholder="Ask your travel question..."></textarea>
+                <textarea name="Question"
+                          placeholder="Ask your travel question...">@Model.QuestionForm.Question</textarea>
             </div>
 
             <button type="submit">Ask AI Assistant</button>
@@ -70,7 +84,7 @@
     </div>
 </section>
 
-@if (Model.HasAnswer && Model.Answer is not null)
+@if (Model.Answer is not null && !string.IsNullOrWhiteSpace(Model.Answer.Answer))
 {
     <section class="ai-answer-section">
         <div class="sp-container">
