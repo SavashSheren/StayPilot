@@ -1,0 +1,76 @@
+﻿@model StayPilot.Application.DTOs.BlogDtos.CreateBlogPostDto
+
+@{
+    ViewData["Title"] = "Create Blog Post";
+}
+
+@if (TempData["AdminError"] is not null)
+{
+    <div class="admin-alert admin-alert-error">@TempData["AdminError"]</div>
+}
+
+<div class="admin-page-head">
+    <div>
+        <h2>Create Blog Post</h2>
+        <p>Add a new editorial insight for the public landing page.</p>
+    </div>
+
+    <div class="admin-filter-actions">
+        <a asp-area="Admin" asp-controller="BlogPosts" asp-action="Index">
+            Back to Blog Posts
+        </a>
+    </div>
+</div>
+
+<form class="admin-form-panel" asp-area="Admin" asp-controller="BlogPosts" asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="admin-form-grid">
+        <div class="admin-form-group">
+            <label>Title</label>
+            <input asp-for="Title" required />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Slug</label>
+            <input asp-for="Slug" placeholder="Leave empty to auto-generate" />
+        </div>
+
+        <div class="admin-form-group full">
+            <label>Summary</label>
+            <textarea asp-for="Summary" required></textarea>
+        </div>
+
+        <div class="admin-form-group full">
+            <label>Content</label>
+            <textarea asp-for="Content" required></textarea>
+        </div>
+
+        <div class="admin-form-group full">
+            <label>Cover Image URL</label>
+            <input asp-for="CoverImageUrl" required />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Author Name</label>
+            <input asp-for="AuthorName" required />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Reading Time Minute</label>
+            <input asp-for="ReadingTimeMinute" type="number" min="1" />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Featured</label>
+            <select asp-for="IsFeatured">
+                <option value="true">Featured</option>
+                <option value="false">Standard</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="admin-form-actions">
+        <button type="submit">Create Blog Post</button>
+    </div>
+</form>

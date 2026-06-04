@@ -16,6 +16,7 @@ builder.Services.AddHttpClient("StayPilotApi", client =>
     client.BaseAddress = new Uri(baseUrl);
 });
 
+builder.Services.AddScoped<IAdminBlogPostApiService, AdminBlogPostApiService>();
 builder.Services.AddScoped<IAdminDestinationApiService, AdminDestinationApiService>();
 builder.Services.AddScoped<IAdminHeroSectionApiService, AdminHeroSectionApiService>();
 builder.Services.AddScoped<IAdminContactMessageApiService, AdminContactMessageApiService>();

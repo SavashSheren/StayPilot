@@ -1,0 +1,125 @@
+﻿@model List<StayPilot.Application.DTOs.BlogDtos.ResultBlogPostDto>
+
+@{
+    ViewData["Title"] = "Blog Posts";
+}
+
+@if (TempData["AdminSuccess"] is not null)
+{
+    <div class="admin-alert admin-alert-success">@TempData["AdminSuccess"]</div>
+}
+
+@if (TempData["AdminError"] is not null)
+{
+    <div class="admin-alert admin-alert-error">@TempData["AdminError"]</div>
+}
+
+<div class="admin-page-head">
+    <div>
+        <h2>Blog Post Management</h2>
+        <p>Manage editorial travel insights displayed on the public landing page.</p>
+    </div>
+
+    <div class="admin-filter-actions">
+        <a asp-area="Admin" asp-controller="BlogPosts" asp-action="Create" class="active">
+            Create New Blog Post
+        </a>
+    </div>
+</div>
+
+<div class="admin-blog-grid">
+    @if (Model.Any())
+    {
+        foreach (var blog in Model)
+        {
+            <article class="admin-blog-card">
+                <div class="admin-blog-image" style="background-image: url('@blog.CoverImageUrl');">
+                    <div class="admin-blog-overlay">
+                        <span>@blog.ReadingTimeMinute min read</span>
+                        <h3>@blog.Title</h3>
+                        <p>@blog.AuthorName</p>
+                    </div>
+                </div>
+
+                <div class="admin-blog-body">
+                    <p>@blog.Summary</p>
+
+                    <div class="admin-blog-slug">
+                        <span>Slug</span>
+                        <strong>@blog.Slug</strong>
+                    </div>
+
+                    <div class="admin-destination-badges">
+                        @if (blog.IsActive)
+                        {
+                            <span class="admin-badge admin-badge-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="admin-badge admin-badge-muted">Passive</span>
+                        }
+
+                        @if (blog.IsFeatured)
+                        {
+                            <span class="admin-badge admin-badge-warning">Featured</span>
+                        }
+                        else
+                        {
+                            <span class="admin-badge admin-badge-muted">Standard</span>
+                        }
+                    </div>
+
+                    <div class="admin-hero-actions">
+                        <a asp-area="Admin"
+                           asp-controller="BlogPosts"
+                           asp-action="Update"
+                           asp-route-id="@blog.Id">
+                            Edit
+                        </a>
+
+                        @if (blog.IsActive)
+                        {
+                            <form asp-area="Admin"
+                                  asp-controller="BlogPosts"
+                                  asp-action="Deactivate"
+                                  asp-route-id="@blog.Id"
+                                  method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="secondary">Deactivate</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-area="Admin"
+                                  asp-controller="BlogPosts"
+                                  asp-action="Activate"
+                                  asp-route-id="@blog.Id"
+                                  method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit">Activate</button>
+                            </form>
+                        }
+
+                        <form asp-area="Admin"
+                              asp-controller="BlogPosts"
+                              asp-action="Delete"
+                              asp-route-id="@blog.Id"
+                              method="post"
+                              onsubmit="return confirm('Are you sure you want to delete this blog post?');">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </article>
+        }
+    }
+    else
+    {
+        <div class="admin-empty-state">
+            <h3>No blog posts found.</h3>
+            <p>Create your first blog post to power the travel insights section.</p>
+            <a asp-area="Admin" asp-controller="BlogPosts" asp-action="Create">Create Blog Post</a>
+        </div>
+    }
+</div>

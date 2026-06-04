@@ -46,7 +46,10 @@
                     <span>◈</span> Destinations
                 </a>
 
-                <a href="#">
+                <a asp-area="Admin"
+                   asp-controller="BlogPosts"
+                   asp-action="Index"
+                   class="@(currentController == "BlogPosts" ? "active" : "")">
                     <span>✎</span> Blog Posts
                 </a>
 
