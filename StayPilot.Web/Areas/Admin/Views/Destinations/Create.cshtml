@@ -1,0 +1,76 @@
+﻿@model StayPilot.Application.DTOs.DestinationDtos.CreateDestinationDto
+
+@{
+    ViewData["Title"] = "Create Destination";
+}
+
+@if (TempData["AdminError"] is not null)
+{
+    <div class="admin-alert admin-alert-error">@TempData["AdminError"]</div>
+}
+
+<div class="admin-page-head">
+    <div>
+        <h2>Create Destination</h2>
+        <p>Add a new featured destination for the public landing page.</p>
+    </div>
+
+    <div class="admin-filter-actions">
+        <a asp-area="Admin" asp-controller="Destinations" asp-action="Index">
+            Back to Destinations
+        </a>
+    </div>
+</div>
+
+<form class="admin-form-panel" asp-area="Admin" asp-controller="Destinations" asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="admin-form-grid">
+        <div class="admin-form-group">
+            <label>City Name</label>
+            <input asp-for="CityName" required />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Country Name</label>
+            <input asp-for="CountryName" required />
+        </div>
+
+        <div class="admin-form-group full">
+            <label>Description</label>
+            <textarea asp-for="Description" required></textarea>
+        </div>
+
+        <div class="admin-form-group full">
+            <label>Image URL</label>
+            <input asp-for="ImageUrl" required />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Highlight Text</label>
+            <input asp-for="HighlightText" />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Average Hotel Price</label>
+            <input asp-for="AverageHotelPrice" type="number" step="0.01" min="0" />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Display Order</label>
+            <input asp-for="DisplayOrder" type="number" min="1" />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Featured</label>
+            <select asp-for="IsFeatured">
+                <option value="true">Featured</option>
+                <option value="false">Standard</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="admin-form-actions">
+        <button type="submit">Create Destination</button>
+    </div>
+</form>

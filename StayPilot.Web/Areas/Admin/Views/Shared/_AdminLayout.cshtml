@@ -39,7 +39,10 @@
                     <span>✦</span> Hero Sections
                 </a>
 
-                <a href="#">
+                <a asp-area="Admin"
+                   asp-controller="Destinations"
+                   asp-action="Index"
+                   class="@(currentController == "Destinations" ? "active" : "")">
                     <span>◈</span> Destinations
                 </a>
 

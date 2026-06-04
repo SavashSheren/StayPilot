@@ -1,0 +1,132 @@
+﻿@model List<StayPilot.Application.DTOs.DestinationDtos.ResultDestinationDto>
+
+@{
+    ViewData["Title"] = "Destinations";
+}
+
+@if (TempData["AdminSuccess"] is not null)
+{
+    <div class="admin-alert admin-alert-success">@TempData["AdminSuccess"]</div>
+}
+
+@if (TempData["AdminError"] is not null)
+{
+    <div class="admin-alert admin-alert-error">@TempData["AdminError"]</div>
+}
+
+<div class="admin-page-head">
+    <div>
+        <h2>Destination Management</h2>
+        <p>Manage destination cards that appear on the public landing page.</p>
+    </div>
+
+    <div class="admin-filter-actions">
+        <a asp-area="Admin" asp-controller="Destinations" asp-action="Create" class="active">
+            Create New Destination
+        </a>
+    </div>
+</div>
+
+<div class="admin-destination-grid">
+    @if (Model.Any())
+    {
+        foreach (var destination in Model)
+        {
+            <article class="admin-destination-card">
+                <div class="admin-destination-image" style="background-image: url('@destination.ImageUrl');">
+                    <div class="admin-destination-overlay">
+                        <span>@destination.HighlightText</span>
+                        <h3>@destination.CityName</h3>
+                        <p>@destination.CountryName</p>
+                    </div>
+                </div>
+
+                <div class="admin-destination-body">
+                    <p>@destination.Description</p>
+
+                    <div class="admin-destination-info">
+                        <div>
+                            <span>Average Price</span>
+                            <strong>$@destination.AverageHotelPrice</strong>
+                        </div>
+
+                        <div>
+                            <span>Order</span>
+                            <strong>@destination.DisplayOrder</strong>
+                        </div>
+                    </div>
+
+                    <div class="admin-destination-badges">
+                        @if (destination.IsActive)
+                        {
+                            <span class="admin-badge admin-badge-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="admin-badge admin-badge-muted">Passive</span>
+                        }
+
+                        @if (destination.IsFeatured)
+                        {
+                            <span class="admin-badge admin-badge-warning">Featured</span>
+                        }
+                        else
+                        {
+                            <span class="admin-badge admin-badge-muted">Standard</span>
+                        }
+                    </div>
+
+                    <div class="admin-hero-actions">
+                        <a asp-area="Admin"
+                           asp-controller="Destinations"
+                           asp-action="Update"
+                           asp-route-id="@destination.Id">
+                            Edit
+                        </a>
+
+                        @if (destination.IsActive)
+                        {
+                            <form asp-area="Admin"
+                                  asp-controller="Destinations"
+                                  asp-action="Deactivate"
+                                  asp-route-id="@destination.Id"
+                                  method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="secondary">Deactivate</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-area="Admin"
+                                  asp-controller="Destinations"
+                                  asp-action="Activate"
+                                  asp-route-id="@destination.Id"
+                                  method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit">Activate</button>
+                            </form>
+                        }
+
+                        <form asp-area="Admin"
+                              asp-controller="Destinations"
+                              asp-action="Delete"
+                              asp-route-id="@destination.Id"
+                              method="post"
+                              onsubmit="return confirm('Are you sure you want to delete this destination?');">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </article>
+        }
+    }
+    else
+    {
+        <div class="admin-empty-state">
+            <h3>No destinations found.</h3>
+            <p>Create your first destination to power the public landing page cards.</p>
+            <a asp-area="Admin" asp-controller="Destinations" asp-action="Create">Create Destination</a>
+        </div>
+    }
+</div>
