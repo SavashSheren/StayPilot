@@ -8,18 +8,24 @@ namespace StayPilot.Web.Controllers
     {
         private readonly IHomeContentApiService _homeContentApiService;
         private readonly IContactMessageApiService _contactMessageApiService;
+        private readonly ITravelIntelligenceApiService _travelIntelligenceApiService;
 
         public HomeController(
             IHomeContentApiService homeContentApiService,
-            IContactMessageApiService contactMessageApiService)
+            IContactMessageApiService contactMessageApiService,
+            ITravelIntelligenceApiService travelIntelligenceApiService)
         {
             _homeContentApiService = homeContentApiService;
             _contactMessageApiService = contactMessageApiService;
+            _travelIntelligenceApiService = travelIntelligenceApiService;
         }
 
         public async Task<IActionResult> Index()
         {
             var model = await _homeContentApiService.GetLandingContentAsync();
+
+            ViewBag.Weather = await _travelIntelligenceApiService.GetWeatherAsync("Istanbul");
+            ViewBag.Currency = await _travelIntelligenceApiService.GetCurrencyRateAsync("USD", "TRY");
 
             return View(model);
         }

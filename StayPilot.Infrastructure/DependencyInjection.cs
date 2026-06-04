@@ -22,6 +22,8 @@ namespace StayPilot.Infrastructure
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IHotelProviderClient, MockHotelProviderClient>();
             services.AddScoped<IAiProviderClient, MockAiProviderClient>();
+            services.AddScoped<IWeatherProviderClient, MockWeatherProviderClient>();
+            services.AddScoped<ICurrencyProviderClient, MockCurrencyProviderClient>();
 
             return services;
         }
