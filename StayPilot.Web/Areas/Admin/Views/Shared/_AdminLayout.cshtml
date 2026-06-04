@@ -60,7 +60,10 @@
                     <span>✉</span> Messages
                 </a>
 
-                <a href="#">
+                <a asp-area="Admin"
+                   asp-controller="ApiHealth"
+                   asp-action="Index"
+                   class="@(currentController == "ApiHealth" ? "active" : "")">
                     <span>◎</span> API Health
                 </a>
             </nav>

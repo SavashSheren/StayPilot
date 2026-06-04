@@ -1,0 +1,108 @@
+﻿@model StayPilot.Web.Areas.Admin.ViewModels.ApiHealthViewModel
+
+@{
+    ViewData["Title"] = "API Health";
+}
+
+<div class="admin-page-head">
+    <div>
+        <h2>System Status</h2>
+        <p>Monitor StayPilot API, database connectivity and platform readiness.</p>
+    </div>
+
+    <div class="admin-filter-actions">
+        <a asp-area="Admin" asp-controller="ApiHealth" asp-action="Index" class="active">
+            Refresh Status
+        </a>
+    </div>
+</div>
+
+<section class="admin-health-grid">
+    <article class="admin-health-card @(Model.IsApiHealthy ? "healthy" : "danger")">
+        <div class="admin-health-icon">
+            @(Model.IsApiHealthy ? "✓" : "!")
+        </div>
+
+        <div>
+            <span>API Status</span>
+            <h3>@Model.ApiHealth.Status</h3>
+            <p>@Model.ApiHealth.Message</p>
+        </div>
+    </article>
+
+    <article class="admin-health-card @(Model.IsDatabaseHealthy ? "healthy" : "danger")">
+        <div class="admin-health-icon">
+            @(Model.IsDatabaseHealthy ? "✓" : "!")
+        </div>
+
+        <div>
+            <span>Database Status</span>
+            <h3>@(Model.IsDatabaseHealthy ? "Connected" : "Disconnected")</h3>
+            <p>@Model.DatabaseHealth.Database</p>
+        </div>
+    </article>
+</section>
+
+<section class="admin-health-details-grid">
+    <div class="admin-panel">
+        <div class="admin-panel-header">
+            <div>
+                <h2>API Details</h2>
+                <p>Current WebAPI health response.</p>
+            </div>
+        </div>
+
+        <div class="admin-system-list">
+            <div class="admin-system-item">
+                <strong>Project</strong>
+                <span>@Model.ApiHealth.Project</span>
+            </div>
+
+            <div class="admin-system-item">
+                <strong>Service</strong>
+                <span>@Model.ApiHealth.Service</span>
+            </div>
+
+            <div class="admin-system-item">
+                <strong>Base URL</strong>
+                <span>@Model.ApiBaseUrl</span>
+            </div>
+
+            <div class="admin-system-item">
+                <strong>Last Checked</strong>
+                <span>@Model.ApiHealth.CheckedAt.ToLocalTime().ToString("dd MMM yyyy HH:mm:ss")</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-panel">
+        <div class="admin-panel-header">
+            <div>
+                <h2>Architecture Snapshot</h2>
+                <p>Why this page matters in the project architecture.</p>
+            </div>
+        </div>
+
+        <div class="admin-system-list">
+            <div class="admin-system-item">
+                <strong>Web Layer</strong>
+                <span>StayPilot.Web consumes API endpoints through HttpClientFactory.</span>
+            </div>
+
+            <div class="admin-system-item">
+                <strong>API Layer</strong>
+                <span>StayPilot.API owns controllers, service orchestration and database health checks.</span>
+            </div>
+
+            <div class="admin-system-item">
+                <strong>Infrastructure Layer</strong>
+                <span>EF Core, SQL Server and repository implementation stay isolated from Web UI.</span>
+            </div>
+
+            <div class="admin-system-item">
+                <strong>Database Check</strong>
+                <span>CanConnect result: @(Model.DatabaseHealth.CanConnect ? "true" : "false")</span>
+            </div>
+        </div>
+    </div>
+</section>

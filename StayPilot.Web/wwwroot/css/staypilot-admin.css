@@ -991,3 +991,84 @@ a {
         grid-template-columns: 1fr;
     }
 }
+.admin-health-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    margin-bottom: 24px;
+}
+
+.admin-health-card {
+    padding: 28px;
+    border-radius: 30px;
+    background: white;
+    border: 1px solid var(--admin-border);
+    box-shadow: var(--admin-shadow);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+    .admin-health-card.healthy {
+        background: radial-gradient(circle at top right, rgba(16, 185, 129, .12), transparent 35%), #ffffff;
+    }
+
+    .admin-health-card.danger {
+        background: radial-gradient(circle at top right, rgba(239, 68, 68, .12), transparent 35%), #ffffff;
+    }
+
+.admin-health-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 22px;
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+    background: var(--admin-dark);
+}
+
+.admin-health-card.healthy .admin-health-icon {
+    background: #059669;
+}
+
+.admin-health-card.danger .admin-health-icon {
+    background: #dc2626;
+}
+
+.admin-health-card span {
+    display: block;
+    color: var(--admin-muted);
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 8px;
+}
+
+.admin-health-card h3 {
+    margin: 0;
+    font-size: 34px;
+    letter-spacing: -0.06em;
+}
+
+.admin-health-card p {
+    margin: 8px 0 0;
+    color: var(--admin-muted);
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.admin-health-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+@media (max-width: 920px) {
+    .admin-health-grid,
+    .admin-health-details-grid {
+        grid-template-columns: 1fr;
+    }
+}
