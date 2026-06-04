@@ -1,0 +1,88 @@
+﻿@model StayPilot.Application.DTOs.HeroDtos.UpdateHeroSectionDto
+
+@{
+    ViewData["Title"] = "Update Hero Section";
+}
+
+@if (TempData["AdminError"] is not null)
+{
+    <div class="admin-alert admin-alert-error">@TempData["AdminError"]</div>
+}
+
+<div class="admin-page-head">
+    <div>
+        <h2>Update Hero Section</h2>
+        <p>Edit the landing page hero content and call-to-action structure.</p>
+    </div>
+
+    <div class="admin-filter-actions">
+        <a asp-area="Admin" asp-controller="HeroSections" asp-action="Index">
+            Back to Hero Sections
+        </a>
+    </div>
+</div>
+
+<form class="admin-form-panel" asp-area="Admin" asp-controller="HeroSections" asp-action="Update" method="post">
+    @Html.AntiForgeryToken()
+
+    <input asp-for="Id" type="hidden" />
+
+    <div class="admin-form-grid">
+        <div class="admin-form-group">
+            <label>Title</label>
+            <input asp-for="Title" required />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Subtitle</label>
+            <input asp-for="Subtitle" />
+        </div>
+
+        <div class="admin-form-group full">
+            <label>Description</label>
+            <textarea asp-for="Description" required></textarea>
+        </div>
+
+        <div class="admin-form-group full">
+            <label>Background Image URL</label>
+            <input asp-for="BackgroundImageUrl" required />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Primary Button Text</label>
+            <input asp-for="PrimaryButtonText" />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Primary Button URL</label>
+            <input asp-for="PrimaryButtonUrl" />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Secondary Button Text</label>
+            <input asp-for="SecondaryButtonText" />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Secondary Button URL</label>
+            <input asp-for="SecondaryButtonUrl" />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Display Order</label>
+            <input asp-for="DisplayOrder" type="number" min="1" />
+        </div>
+
+        <div class="admin-form-group">
+            <label>Status</label>
+            <select asp-for="IsActive">
+                <option value="true">Active</option>
+                <option value="false">Passive</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="admin-form-actions">
+        <button type="submit">Update Hero Section</button>
+    </div>
+</form>

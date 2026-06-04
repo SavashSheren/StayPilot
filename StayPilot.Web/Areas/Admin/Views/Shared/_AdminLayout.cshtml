@@ -32,7 +32,10 @@
                     <span>⌁</span> Dashboard
                 </a>
 
-                <a href="#">
+                <a asp-area="Admin"
+                   asp-controller="HeroSections"
+                   asp-action="Index"
+                   class="@(currentController == "HeroSections" ? "active" : "")">
                     <span>✦</span> Hero Sections
                 </a>
 
