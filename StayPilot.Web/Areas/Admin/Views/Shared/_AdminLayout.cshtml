@@ -20,8 +20,15 @@
                 </span>
             </a>
 
+            @{
+                var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+            }
+
             <nav class="admin-menu">
-                <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="active">
+                <a asp-area="Admin"
+                   asp-controller="Dashboard"
+                   asp-action="Index"
+                   class="@(currentController == "Dashboard" ? "active" : "")">
                     <span>⌁</span> Dashboard
                 </a>
 
@@ -37,7 +44,10 @@
                     <span>✎</span> Blog Posts
                 </a>
 
-                <a href="#">
+                <a asp-area="Admin"
+                   asp-controller="ContactMessages"
+                   asp-action="Index"
+                   class="@(currentController == "ContactMessages" ? "active" : "")">
                     <span>✉</span> Messages
                 </a>
 

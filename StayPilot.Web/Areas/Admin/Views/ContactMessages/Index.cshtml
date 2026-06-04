@@ -1,0 +1,130 @@
+﻿@model List<StayPilot.Application.DTOs.ContactDtos.ResultContactMessageDto>
+@using StayPilot.Domain.Enums
+
+@{
+    ViewData["Title"] = "Contact Messages";
+    var currentFilter = ViewBag.Filter?.ToString() ?? "all";
+}
+
+@if (TempData["AdminSuccess"] is not null)
+{
+    <div class="admin-alert admin-alert-success">@TempData["AdminSuccess"]</div>
+}
+
+@if (TempData["AdminError"] is not null)
+{
+    <div class="admin-alert admin-alert-error">@TempData["AdminError"]</div>
+}
+
+<div class="admin-page-head">
+    <div>
+        <h2>Message Management</h2>
+        <p>Review messages sent from the public StayPilot contact form.</p>
+    </div>
+
+    <div class="admin-filter-actions">
+        <a asp-area="Admin"
+           asp-controller="ContactMessages"
+           asp-action="Index"
+           asp-route-filter="all"
+           class="@(currentFilter == "all" ? "active" : "")">
+            All Messages
+        </a>
+
+        <a asp-area="Admin"
+           asp-controller="ContactMessages"
+           asp-action="Index"
+           asp-route-filter="unread"
+           class="@(currentFilter == "unread" ? "active" : "")">
+            Unread
+        </a>
+    </div>
+</div>
+
+<div class="admin-panel">
+    <div class="admin-panel-header">
+        <div>
+            <h2>Contact Inbox</h2>
+            <p>@Model.Count message record(s) found.</p>
+        </div>
+    </div>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Sender</th>
+                <th>Subject</th>
+                <th>Status</th>
+                <th>Received</th>
+                <th class="admin-table-actions">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var message in Model)
+                {
+                    <tr>
+                        <td>
+                            @message.FullName
+                            <small>@message.Email</small>
+                        </td>
+
+                        <td>
+                            @message.Subject
+                            <small>@(message.Message.Length > 90 ? message.Message.Substring(0, 90) + "..." : message.Message)</small>
+                        </td>
+
+                        <td>
+                            @if (message.Status == ContactMessageStatus.Unread)
+                            {
+                                <span class="admin-badge admin-badge-warning">Unread</span>
+                            }
+                            else if (message.Status == ContactMessageStatus.Archived)
+                            {
+                                <span class="admin-badge admin-badge-muted">Archived</span>
+                            }
+                            else
+                            {
+                                <span class="admin-badge admin-badge-success">Read</span>
+                            }
+                        </td>
+
+                        <td>
+                            @message.CreatedDate.ToLocalTime().ToString("dd MMM yyyy")
+                            <small>@message.CreatedDate.ToLocalTime().ToString("HH:mm")</small>
+                        </td>
+
+                        <td>
+                            <div class="admin-row-actions">
+                                <a asp-area="Admin"
+                                   asp-controller="ContactMessages"
+                                   asp-action="Detail"
+                                   asp-route-id="@message.Id">
+                                    View
+                                </a>
+
+                                <form asp-area="Admin"
+                                      asp-controller="ContactMessages"
+                                      asp-action="Delete"
+                                      asp-route-id="@message.Id"
+                                      method="post"
+                                      onsubmit="return confirm('Are you sure you want to delete this message?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5">No contact messages found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
