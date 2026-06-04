@@ -1,0 +1,91 @@
+﻿@model StayPilot.Web.ViewModels.AiAssistantPageViewModel
+
+@{
+    ViewData["Title"] = "AI Travel Assistant";
+}
+
+<section class="ai-page-hero">
+    <div class="sp-container ai-page-grid">
+        <div>
+            <span class="hotel-kicker">AI Travel Assistant</span>
+            <h1>Plan smarter trips with StayPilot AI.</h1>
+            <p>
+                Ask destination, hotel, budget or trip planning questions. This version uses a mock AI provider and logs conversations into SQL Server.
+            </p>
+
+            <div class="ai-page-points">
+                <div>
+                    <strong>API Powered</strong>
+                    <span>Questions are sent through StayPilot.API</span>
+                </div>
+
+                <div>
+                    <strong>Database Logged</strong>
+                    <span>Each conversation is stored in AiConversationLogs</span>
+                </div>
+
+                <div>
+                    <strong>Provider Ready</strong>
+                    <span>Mock provider can be replaced with real AI provider later</span>
+                </div>
+            </div>
+        </div>
+
+        <form class="ai-question-panel"
+              asp-controller="AiTravelAssistant"
+              asp-action="Ask"
+              method="post">
+            @Html.AntiForgeryToken()
+
+            <h2>Ask StayPilot</h2>
+            <p>Give the assistant your destination, travel style and question.</p>
+
+            @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <div class="sp-alert sp-alert-error">@Model.ErrorMessage</div>
+            }
+
+            <div class="sp-field light">
+                <label>Destination</label>
+                <input asp-for="QuestionForm.Destination" placeholder="Istanbul, Paris, Dubai..." />
+            </div>
+
+            <div class="sp-field light">
+                <label>Travel Date</label>
+                <input asp-for="QuestionForm.TravelDate" placeholder="2026-07-01" />
+            </div>
+
+            <div class="sp-field light">
+                <label>Travel Style</label>
+                <input asp-for="QuestionForm.TravelStyle" placeholder="Luxury, budget, culture, business..." />
+            </div>
+
+            <div class="sp-field light">
+                <label>Your Question</label>
+                <textarea asp-for="QuestionForm.Question" placeholder="Ask your travel question..."></textarea>
+            </div>
+
+            <button type="submit">Ask AI Assistant</button>
+        </form>
+    </div>
+</section>
+
+@if (Model.HasAnswer && Model.Answer is not null)
+{
+    <section class="ai-answer-section">
+        <div class="sp-container">
+            <div class="ai-answer-card">
+                <div class="ai-answer-header">
+                    <div>
+                        <span class="hotel-kicker">AI Response</span>
+                        <h2>StayPilot recommendation</h2>
+                    </div>
+
+                    <strong>@Model.Answer.ModelName</strong>
+                </div>
+
+                <pre>@Model.Answer.Answer</pre>
+            </div>
+        </div>
+    </section>
+}

@@ -1050,3 +1050,170 @@ a {
         margin-top: 8px;
     }
 }
+.ai-page-hero {
+    padding: 96px 0;
+    background: radial-gradient(circle at 78% 12%, rgba(56, 189, 248, .26), transparent 34%), linear-gradient(135deg, #07111f, #0b1f3a);
+    color: white;
+}
+
+.ai-page-grid {
+    display: grid;
+    grid-template-columns: .95fr 1.05fr;
+    gap: 46px;
+    align-items: center;
+}
+
+.ai-page-hero h1 {
+    margin: 20px 0;
+    font-size: clamp(46px, 7vw, 84px);
+    line-height: .94;
+    letter-spacing: -0.085em;
+}
+
+.ai-page-hero p {
+    color: rgba(255,255,255,.68);
+    line-height: 1.8;
+    font-size: 17px;
+    max-width: 650px;
+}
+
+.ai-page-points {
+    display: grid;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+    .ai-page-points div {
+        padding: 18px;
+        border-radius: 22px;
+        background: rgba(255,255,255,.08);
+        border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .ai-page-points strong {
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .ai-page-points span {
+        color: rgba(255,255,255,.62);
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
+.ai-question-panel {
+    padding: 28px;
+    border-radius: 32px;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.16);
+    backdrop-filter: blur(22px);
+    box-shadow: var(--sp-shadow);
+    display: grid;
+    gap: 14px;
+}
+
+    .ai-question-panel h2 {
+        margin: 0;
+        font-size: 30px;
+        letter-spacing: -0.05em;
+    }
+
+    .ai-question-panel p {
+        margin: 0 0 10px;
+        font-size: 14px;
+    }
+
+    .ai-question-panel textarea {
+        width: 100%;
+        min-height: 150px;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,.16);
+        background: rgba(255,255,255,.12);
+        color: white;
+        padding: 16px;
+        font-family: inherit;
+        outline: none;
+        resize: vertical;
+    }
+
+        .ai-question-panel textarea::placeholder {
+            color: rgba(255,255,255,.46);
+        }
+
+    .ai-question-panel button {
+        border: 0;
+        height: 56px;
+        border-radius: 18px;
+        background: white;
+        color: var(--sp-dark);
+        font-family: inherit;
+        font-weight: 900;
+        cursor: pointer;
+    }
+
+.ai-answer-section {
+    padding: 80px 0 100px;
+}
+
+.ai-answer-card {
+    background: white;
+    border: 1px solid var(--sp-border);
+    border-radius: 34px;
+    box-shadow: 0 24px 80px rgba(15, 23, 42, .12);
+    overflow: hidden;
+}
+
+.ai-answer-header {
+    padding: 28px;
+    border-bottom: 1px solid var(--sp-border);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+}
+
+    .ai-answer-header .hotel-kicker {
+        color: var(--sp-blue);
+        background: rgba(37, 99, 235, .08);
+        border-color: rgba(37, 99, 235, .16);
+    }
+
+    .ai-answer-header h2 {
+        margin: 14px 0 0;
+        font-size: 36px;
+        letter-spacing: -0.06em;
+    }
+
+    .ai-answer-header strong {
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: var(--sp-dark);
+        color: white;
+        font-size: 13px;
+    }
+
+.ai-answer-card pre {
+    margin: 0;
+    padding: 32px;
+    white-space: pre-wrap;
+    font-family: inherit;
+    color: var(--sp-text);
+    line-height: 1.85;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+@media (max-width: 980px) {
+    .ai-page-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-answer-header {
+        display: block;
+    }
+
+        .ai-answer-header strong {
+            display: inline-flex;
+            margin-top: 18px;
+        }
+}
