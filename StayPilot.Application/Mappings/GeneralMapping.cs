@@ -4,6 +4,7 @@ using StayPilot.Application.DTOs.ContactDtos;
 using StayPilot.Application.DTOs.DestinationDtos;
 using StayPilot.Application.DTOs.HeroDtos;
 using StayPilot.Domain.Entities;
+using StayPilot.Application.DTOs.AiDtos;
 
 namespace StayPilot.Application.Mappings
 {
@@ -25,6 +26,8 @@ namespace StayPilot.Application.Mappings
 
             CreateMap<ContactMessage, ResultContactMessageDto>().ReverseMap();
             CreateMap<CreateContactMessageDto, ContactMessage>();
+
+            CreateMap<AiConversationLog, ResultAiConversationLogDto>().ReverseMap();
         }
     }
 }

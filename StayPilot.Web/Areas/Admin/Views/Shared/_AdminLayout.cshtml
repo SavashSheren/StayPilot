@@ -59,6 +59,12 @@
                    class="@(currentController == "ContactMessages" ? "active" : "")">
                     <span>✉</span> Messages
                 </a>
+                <a asp-area="Admin"
+                   asp-controller="AiConversationLogs"
+                   asp-action="Index"
+                   class="@(currentController == "AiConversationLogs" ? "active" : "")">
+                    <span>🤖</span> AI Conversations
+                </a>
 
                 <a asp-area="Admin"
                    asp-controller="ApiHealth"

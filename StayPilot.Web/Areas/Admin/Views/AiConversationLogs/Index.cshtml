@@ -1,0 +1,118 @@
+﻿@model List<StayPilot.Application.DTOs.AiDtos.ResultAiConversationLogDto>
+
+@{
+    ViewData["Title"] = "AI Conversations";
+}
+
+@if (TempData["AdminSuccess"] is not null)
+{
+    <div class="admin-alert admin-alert-success">@TempData["AdminSuccess"]</div>
+}
+
+@if (TempData["AdminError"] is not null)
+{
+    <div class="admin-alert admin-alert-error">@TempData["AdminError"]</div>
+}
+
+<div class="admin-page-head">
+    <div>
+        <h2>AI Conversation Logs</h2>
+        <p>Review questions asked to the StayPilot AI Travel Assistant.</p>
+    </div>
+
+    <div class="admin-filter-actions">
+        <a asp-area="" asp-controller="AiTravelAssistant" asp-action="Index" class="active">
+            Open AI Assistant
+        </a>
+    </div>
+</div>
+
+<div class="admin-panel">
+    <div class="admin-panel-header">
+        <div>
+            <h2>Conversation History</h2>
+            <p>@Model.Count AI conversation record(s) found.</p>
+        </div>
+    </div>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Model</th>
+                <th>Tokens</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th class="admin-table-actions">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var log in Model)
+                {
+                    <tr>
+                        <td>
+                            @(log.UserQuestion.Length > 90 ? log.UserQuestion.Substring(0, 90) + "..." : log.UserQuestion)
+                            <small>@(log.AiAnswer.Length > 100 ? log.AiAnswer.Substring(0, 100) + "..." : log.AiAnswer)</small>
+                        </td>
+
+                        <td>
+                            @log.ModelName
+                            <small>StayPilot AI Provider</small>
+                        </td>
+
+                        <td>
+                            @log.TokenUsage
+                            <small>Estimated usage</small>
+                        </td>
+
+                        <td>
+                            @if (log.IsSuccessful)
+                            {
+                                <span class="admin-badge admin-badge-success">Success</span>
+                            }
+                            else
+                            {
+                                <span class="admin-badge admin-badge-warning">Failed</span>
+                            }
+                        </td>
+
+                        <td>
+                            @log.CreatedDate.ToLocalTime().ToString("dd MMM yyyy")
+                            <small>@log.CreatedDate.ToLocalTime().ToString("HH:mm")</small>
+                        </td>
+
+                        <td>
+                            <div class="admin-row-actions">
+                                <a asp-area="Admin"
+                                   asp-controller="AiConversationLogs"
+                                   asp-action="Detail"
+                                   asp-route-id="@log.Id">
+                                    View
+                                </a>
+
+                                <form asp-area="Admin"
+                                      asp-controller="AiConversationLogs"
+                                      asp-action="Delete"
+                                      asp-route-id="@log.Id"
+                                      method="post"
+                                      onsubmit="return confirm('Are you sure you want to delete this AI conversation log?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">No AI conversation logs found yet.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

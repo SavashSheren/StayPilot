@@ -1253,3 +1253,37 @@ a {
         display: none;
     }
 }
+.admin-ai-detail-grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 22px;
+    align-items: start;
+}
+
+.admin-ai-message-block {
+    padding: 26px;
+}
+
+    .admin-ai-message-block pre {
+        margin: 0;
+        white-space: pre-wrap;
+        font-family: inherit;
+        font-size: 15px;
+        line-height: 1.85;
+        font-weight: 650;
+    }
+
+    .admin-ai-message-block.question {
+        background: #f8fafc;
+        border-bottom: 1px solid var(--admin-border);
+    }
+
+    .admin-ai-message-block.answer {
+        background: white;
+    }
+
+@media (max-width: 920px) {
+    .admin-ai-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
