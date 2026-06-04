@@ -18,11 +18,15 @@
             </a>
 
             <nav class="sp-menu">
-                <a href="#destinations">Destinations</a>
-                <a href="#ai">AI Assistant</a>
-                <a href="#insights">Insights</a>
-                <a href="#contact">Contact</a>
+                <a asp-controller="Home" asp-action="Index" asp-fragment="destinations">Destinations</a>
+                <a asp-controller="AiTravelAssistant" asp-action="Index">AI Assistant</a>
+                <a asp-controller="Home" asp-action="Index" asp-fragment="insights">Insights</a>
+                <a asp-controller="Home" asp-action="Index" asp-fragment="contact">Contact</a>
             </nav>
+
+            <a class="sp-nav-btn" asp-controller="Home" asp-action="Index" asp-fragment="search">
+                Start Planning
+            </a>
 
             <a class="sp-nav-btn" href="#search">Start Planning</a>
         </div>

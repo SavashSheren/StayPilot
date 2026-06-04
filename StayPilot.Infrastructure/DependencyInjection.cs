@@ -3,8 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StayPilot.Application.Interfaces;
 using StayPilot.Infrastructure.Context;
-using StayPilot.Infrastructure.Repositories;
 using StayPilot.Infrastructure.ExternalServices;
+using StayPilot.Infrastructure.Repositories;
 
 namespace StayPilot.Infrastructure
 {
@@ -20,7 +20,22 @@ namespace StayPilot.Infrastructure
             });
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IHotelProviderClient, MockHotelProviderClient>();
+
+            services.AddHttpClient<RapidApiBookingHotelProviderClient>();
+
+            var providerName = configuration["HotelProvider:ProviderName"];
+            var rapidApiKey = configuration["HotelProvider:RapidApiKey"];
+
+            if (string.Equals(providerName, "RapidApiBooking", StringComparison.OrdinalIgnoreCase) &&
+                !string.IsNullOrWhiteSpace(rapidApiKey))
+            {
+                services.AddScoped<IHotelProviderClient, RapidApiBookingHotelProviderClient>();
+            }
+            else
+            {
+                services.AddScoped<IHotelProviderClient, MockHotelProviderClient>();
+            }
+
             services.AddScoped<IAiProviderClient, MockAiProviderClient>();
             services.AddScoped<IWeatherProviderClient, MockWeatherProviderClient>();
             services.AddScoped<ICurrencyProviderClient, MockCurrencyProviderClient>();
