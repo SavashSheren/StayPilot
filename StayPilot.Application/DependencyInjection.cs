@@ -15,6 +15,7 @@ namespace StayPilot.Application
             services.AddScoped<IDestinationService, DestinationService>();
             services.AddScoped<IBlogPostService, BlogPostService>();
             services.AddScoped<IContactMessageService, ContactMessageService>();
+            services.AddScoped<IHotelSearchService, HotelSearchService>();
 
             return services;
         }

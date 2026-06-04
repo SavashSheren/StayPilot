@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using StayPilot.Web.Areas.Admin.ViewModels;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+
 namespace StayPilot.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class AuthController : Controller
     {
         private readonly IConfiguration _configuration;

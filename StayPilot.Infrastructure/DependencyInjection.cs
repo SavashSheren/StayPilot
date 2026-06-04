@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using StayPilot.Application.Interfaces;
 using StayPilot.Infrastructure.Context;
 using StayPilot.Infrastructure.Repositories;
+using StayPilot.Infrastructure.ExternalServices;
 
 namespace StayPilot.Infrastructure
 {
@@ -19,6 +20,7 @@ namespace StayPilot.Infrastructure
             });
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IHotelProviderClient, MockHotelProviderClient>();
 
             return services;
         }
