@@ -31,6 +31,7 @@ builder.Services.AddHttpClient("StayPilotApi", client =>
     client.BaseAddress = new Uri(baseUrl);
 });
 
+builder.Services.AddScoped<IHotelSearchApiService, HotelSearchApiService>();
 builder.Services.AddScoped<IHomeContentApiService, HomeContentApiService>();
 builder.Services.AddScoped<IContactMessageApiService, ContactMessageApiService>();
 builder.Services.AddScoped<IAdminDashboardApiService, AdminDashboardApiService>();

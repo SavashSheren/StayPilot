@@ -1,0 +1,68 @@
+﻿@model StayPilot.Application.DTOs.HotelDtos.ResultHotelDetailDto
+
+@{
+    ViewData["Title"] = Model.HotelName;
+    var coverImage = Model.ImageUrls.Any()
+        ? Model.ImageUrls.First()
+        : "https://images.unsplash.com/photo-1566073771259-6a8506099945";
+}
+
+<section class="hotel-detail-hero">
+    <div class="hotel-detail-bg" style="background-image: url('@coverImage');"></div>
+
+    <div class="sp-container hotel-detail-hero-content">
+        <span class="hotel-kicker">Hotel Detail</span>
+        <h1>@Model.HotelName</h1>
+        <p>@Model.Address · @Model.CityName, @Model.CountryName</p>
+
+        <div class="hotel-detail-rating">
+            <strong>@Model.ReviewScore.ToString("0.0")</strong>
+            <span>@Model.ReviewScoreWord</span>
+        </div>
+    </div>
+</section>
+
+<section class="hotel-detail-section">
+    <div class="sp-container hotel-detail-grid">
+        <main>
+            <div class="hotel-gallery-grid">
+                @foreach (var image in Model.ImageUrls.Take(4))
+                {
+                    <div style="background-image: url('@image');"></div>
+                }
+            </div>
+
+            <article class="hotel-detail-panel">
+                <h2>About this hotel</h2>
+                <p>@Model.Description</p>
+            </article>
+
+            <article class="hotel-detail-panel">
+                <h2>Facilities</h2>
+
+                <div class="hotel-facility-grid">
+                    @foreach (var facility in Model.Facilities)
+                    {
+                        <span>@facility</span>
+                    }
+                </div>
+            </article>
+        </main>
+
+        <aside class="hotel-booking-panel">
+            <span>Starting from</span>
+            <strong>@Model.Currency @Model.Price</strong>
+            <p>Per night estimate from StayPilot provider response.</p>
+
+            <a href="@Model.BookingUrl" target="_blank" rel="noopener">
+                Continue to Booking
+            </a>
+
+            <div class="hotel-map-box">
+                <h3>Location Intelligence</h3>
+                <p>Latitude: @Model.Latitude</p>
+                <p>Longitude: @Model.Longitude</p>
+            </div>
+        </aside>
+    </div>
+</section>

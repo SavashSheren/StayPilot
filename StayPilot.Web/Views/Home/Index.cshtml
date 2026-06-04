@@ -36,33 +36,36 @@
             <h2>Plan smarter trips</h2>
             <p>Search hotels, compare destinations and use AI-powered insights before booking.</p>
 
-            <form class="sp-search-grid">
+            <form class="sp-search-grid" asp-controller="Hotels" asp-action="Search" method="get">
                 <div class="sp-field">
                     <label>Destination</label>
-                    <input type="text" placeholder="Istanbul, Paris, Dubai..." />
+                    <input type="text" name="Destination" placeholder="Istanbul, Paris, Dubai..." value="Istanbul" />
                 </div>
 
                 <div class="sp-field">
                     <label>Check-in</label>
-                    <input type="date" />
+                    <input type="date" name="CheckInDate" value="@DateTime.Today.AddDays(7).ToString("yyyy-MM-dd")" />
                 </div>
 
                 <div class="sp-field">
                     <label>Check-out</label>
-                    <input type="date" />
+                    <input type="date" name="CheckOutDate" value="@DateTime.Today.AddDays(11).ToString("yyyy-MM-dd")" />
                 </div>
 
                 <div class="sp-field">
                     <label>Guests</label>
-                    <select>
-                        <option>2 adults · 1 room</option>
-                        <option>1 adult · 1 room</option>
-                        <option>3 adults · 2 rooms</option>
-                        <option>Family trip</option>
+                    <select name="AdultCount">
+                        <option value="2">2 adults</option>
+                        <option value="1">1 adult</option>
+                        <option value="3">3 adults</option>
+                        <option value="4">4 adults</option>
                     </select>
                 </div>
 
-                <button type="button" class="sp-search-button">Search with StayPilot</button>
+                <input type="hidden" name="RoomCount" value="1" />
+                <input type="hidden" name="Page" value="1" />
+
+                <button type="submit" class="sp-search-button">Search with StayPilot</button>
             </form>
         </div>
     </div>

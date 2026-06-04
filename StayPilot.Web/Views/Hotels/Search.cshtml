@@ -1,0 +1,138 @@
+﻿@model StayPilot.Web.ViewModels.HotelSearchPageViewModel
+
+@{
+    ViewData["Title"] = "Hotel Search";
+}
+
+<section class="hotel-hero">
+    <div class="sp-container hotel-hero-inner">
+        <div>
+            <span class="hotel-kicker">Hotel Discovery</span>
+            <h1>Search hotels with StayPilot intelligence.</h1>
+            <p>
+                Compare hotel options with destination, date, guest and price filters. This UI currently consumes the StayPilot Hotel API mock provider.
+            </p>
+        </div>
+
+        <form class="hotel-search-panel" asp-controller="Hotels" asp-action="Search" method="get">
+            <div class="hotel-search-grid">
+                <div class="sp-field light">
+                    <label>Destination</label>
+                    <input type="text" name="Destination" value="@Model.SearchRequest.Destination" />
+                </div>
+
+                <div class="sp-field light">
+                    <label>Check-in</label>
+                    <input type="date" name="CheckInDate" value="@Model.SearchRequest.CheckInDate.ToString("yyyy-MM-dd")" />
+                </div>
+
+                <div class="sp-field light">
+                    <label>Check-out</label>
+                    <input type="date" name="CheckOutDate" value="@Model.SearchRequest.CheckOutDate.ToString("yyyy-MM-dd")" />
+                </div>
+
+                <div class="sp-field light">
+                    <label>Adults</label>
+                    <input type="number" name="AdultCount" value="@Model.SearchRequest.AdultCount" min="1" />
+                </div>
+
+                <div class="sp-field light">
+                    <label>Rooms</label>
+                    <input type="number" name="RoomCount" value="@Model.SearchRequest.RoomCount" min="1" />
+                </div>
+
+                <div class="sp-field light">
+                    <label>Min Price</label>
+                    <input type="number" name="MinPrice" value="@Model.SearchRequest.MinPrice" min="0" placeholder="Optional" />
+                </div>
+
+                <div class="sp-field light">
+                    <label>Max Price</label>
+                    <input type="number" name="MaxPrice" value="@Model.SearchRequest.MaxPrice" min="0" placeholder="Optional" />
+                </div>
+
+                <input type="hidden" name="Page" value="1" />
+
+                <button type="submit" class="hotel-search-submit">Search Hotels</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<section class="hotel-results-section">
+    <div class="sp-container">
+        <div class="hotel-results-head">
+            <div>
+                <span class="hotel-kicker">Results</span>
+                <h2>@Model.Hotels.Count hotel option(s) found in @Model.SearchRequest.Destination</h2>
+                <p>
+                    @Model.SearchRequest.CheckInDate.ToString("dd MMM yyyy")
+                    -
+                    @Model.SearchRequest.CheckOutDate.ToString("dd MMM yyyy")
+                    · @Model.SearchRequest.AdultCount adult(s)
+                    · @Model.SearchRequest.RoomCount room(s)
+                </p>
+            </div>
+
+            <div class="hotel-api-badge">
+                API Powered
+            </div>
+        </div>
+
+        @if (TempData["HotelError"] is not null)
+        {
+            <div class="sp-alert sp-alert-error">@TempData["HotelError"]</div>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+        {
+            <div class="hotel-empty-state">
+                <h3>No hotels found</h3>
+                <p>@Model.ErrorMessage</p>
+            </div>
+        }
+        else
+        {
+            <div class="hotel-results-grid">
+                @foreach (var hotel in Model.Hotels)
+                {
+                    <article class="hotel-card">
+                        <div class="hotel-card-image" style="background-image: url('@hotel.ImageUrl');">
+                            <span>@hotel.ReviewScoreWord</span>
+                        </div>
+
+                        <div class="hotel-card-content">
+                            <div class="hotel-card-main">
+                                <div>
+                                    <h3>@hotel.HotelName</h3>
+                                    <p>@hotel.Address</p>
+                                </div>
+
+                                <div class="hotel-score">
+                                    @hotel.ReviewScore.ToString("0.0")
+                                </div>
+                            </div>
+
+                            <div class="hotel-card-meta">
+                                <span>@hotel.CityName, @hotel.CountryName</span>
+                                <strong>@hotel.Currency @hotel.Price</strong>
+                            </div>
+
+                            <div class="hotel-card-actions">
+                                <a asp-controller="Hotels"
+                                   asp-action="Detail"
+                                   asp-route-id="@hotel.HotelId">
+                                    View Details
+                                </a>
+
+                                <a href="@hotel.BookingUrl" target="_blank" rel="noopener">
+                                    Booking Link
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                }
+            </div>
+        }
+    </div>
+</section>
